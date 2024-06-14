@@ -11,6 +11,7 @@ const CurrentPageWidget = ({
   setNoteToEdit,
   noteToEdit,
   editNote,
+  deleteNote,
 }) => {
   switch (currentPage) {
     case 'home':
@@ -18,6 +19,7 @@ const CurrentPageWidget = ({
       noteList={noteList} 
       setCurrentPage={setCurrentPage}
       setNoteToEdit={setNoteToEdit}
+      deleteNote={deleteNote}
       />
     case 'add':
       // Berikan function "addNote" ke component "AddNote"
@@ -30,6 +32,8 @@ const CurrentPageWidget = ({
           noteToEdit={noteToEdit}
         />
       );
+
+      
     default:
       return <Home />
   }
@@ -70,6 +74,11 @@ const App = () => {
     setNoteToEdit(null);
   };
 
+  const deleteNote = (id) => {
+    const filteredNotes = noteList.filter((note) => note.id !== id);
+    setNoteList(filteredNotes);
+  };
+
   return (
     <CurrentPageWidget
       currentPage={currentPage}
@@ -80,6 +89,7 @@ const App = () => {
       setNoteToEdit={setNoteToEdit}
       noteToEdit={noteToEdit}
       editNote={editNote}
+      deleteNote={deleteNote}
     />
   );
 };
